@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.edu.nyist.jdbcuserman.biz.AdminBizz;
+import cn.edu.nyist.jdbcuserman.biz.imp.AdminBizzImp;
 import cn.edu.nyist.jdbcuserman.util.DsUtil;
 
 @WebServlet("/login")
@@ -39,34 +41,15 @@ public class LoginServlet extends HttpServlet {
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return ;
 		}
-		//2 到数据库查询
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		boolean ret = false;
-		try {
-			connection = DsUtil.getConn();
-			String sql = "select * from t_user where name=? and pwd=?";
-			System.out.println(sql);
-			statement = connection.prepareStatement(sql);
-			//转义
-			statement.setString(1, name);
-			statement.setString(2, pwd);
-			resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				ret= true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			DsUtil.free(resultSet, statement, connection);
-		}
+		//2 进入业务层查询
+		AdminBizz adminbizz = new AdminBizzImp();
+		boolean ret = adminbizz.findAdminByNameAndPwd(name,pwd);
 		//响应
 		if (ret) {
 			response.sendRedirect("main.jsp");
 		}else {
 			//失败
-			request.setAttribute("mesg", "用户名或密码错误");
+			request.setAttribute("msg", "用户名或密码错误");
 			request.setAttribute("name", name);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}

@@ -7,8 +7,7 @@
 <title>我的第一个web项目</title>
 <!-- 1、告诉浏览器表缩放 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="bs/css/paper/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 .container-fluid {
 	width: 50%;
@@ -24,7 +23,7 @@
 	<div class="container-fluid well">
 		<div class="row">
 			<div class="col-md-12">
-				<form class="form-horizontal" role="form" method="post"
+				<form class="form-horizontal" role="form" method="post" id="loginFrm"
 					action="login">
 					<div class="form-group">
 						<%
@@ -40,7 +39,7 @@
 							用户名： </label>
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="inputName"
-								name="name" value="" />
+								name="name" value="<%=request.getAttribute("name") == null ? "" : request.getAttribute("name")%>" />
 						</div>
 					</div>
 
@@ -49,7 +48,7 @@
 						<label for="inputPassword3" class="col-sm-2 control-label">
 							密码： </label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="inputPassword3" />
+							<input type="password" class="form-control" id="inputPassword3" name="pwd"/>
 						</div>
 					</div>
 
@@ -76,8 +75,10 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="bs/js/jquery.min.js"></script>
-	<script type="text/javascript" src="bs/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="bower_components/jquery-validation/dist/jquery.validate.js"></script>
+	<script type="text/javascript" src="bower_components/jquery-validation-bootstrap-tooltip/jquery-validate.bootstrap-tooltip.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#vcodeImg").click(function(evt) {
@@ -85,6 +86,31 @@
 				this.src = "vcode.png?t=" + Math.random();
 			});
 		});
+		//验证
+		$("#loginFrm").validate({
+			rules : {
+				name : {
+					required : true
+				},
+				pwd : {
+					required : true
+				}
+			},
+			messages : {
+				name : "必须填写",
+				pwd : "必须填写"
+			},
+			tooltip_options : {
+				name : {
+					placement : 'bottom'
+				},
+				pwd : {
+					placement : 'bottom'
+				}
+			}
+		});
+
+	
 	</script>
 </body>
 </html>

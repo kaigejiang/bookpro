@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-
+/**pppp
+ * */
 public class DsUtil {
 	// 这个web需要一个就可以了
 	private static ComboPooledDataSource cds = new ComboPooledDataSource();
@@ -16,10 +17,10 @@ public class DsUtil {
 	}
 
 	public static void free(Statement stmt, Connection conn) {
-		// 首先不能是一个try,因为stmt没有关闭，conn仍然要关闭 18
+		// 首先不能是一个try,因为stmt没有关闭，conn仍然要关闭 
 		/*
-		 * try { stmt.close(); conn.close(); } catch (SQLException e) { // TODO 20
-		 * Auto-generated catch block e.printStackTrace(); } 21
+		 * try { stmt.close(); conn.close(); } catch (SQLException e) {
+		 * Auto-generated catch block e.printStackTrace(); } 
 		 */
 		if (stmt != null) {
 			try {
