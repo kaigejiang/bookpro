@@ -90,19 +90,8 @@
 						</label>
 						<div class="col-sm-10">
 							<select name="tid" class="form-control" id="selectTid">
-								<!--	<option value="1">电子书</option>
-								<option value="2">编程</option>
-								<option value="3">烹饪</option> -->
-								<%
-									List<TypeVo> ls = (List<TypeVo>) request.getAttribute("ls");
-									for (TypeVo typeVo : ls) {
-								%>
-								<option value="<%=typeVo.getId()%>">
-									<%=typeVo.getName()%>
-								</option>
-								<%
-									}
-								%>
+								
+		
 							</select>
 						</div>
 					</div>
@@ -151,7 +140,7 @@
 			$('#inputPubDate').datepicker({
 				format : 'yyyy-mm-dd',
 				language : 'zh-CN',//提示中文界面
-				autoclose : true
+				autoclose : true//自动关闭
 			//自动关闭
 			});
 			//验证
@@ -207,5 +196,14 @@
 			});
 		});
 	</script>
+	<script type="text/javascript">
+		function fillSel() {
+			var sel = document.getElementById("selectTid");
+			for(var i = 0;i< types.length;i++){
+				sel.appendChild(new Option(types[i].name,types[i].id));
+				}
+		}
+	</script>
+	<script type="text/javascript" src="findAllTypes" onload=""></script>
 </body>
 </html>
