@@ -204,6 +204,6 @@
 				}
 		}
 	</script>
-	<script type="text/javascript" src="findAllTypes" onload=""></script>
+	<script type="text/javascript" src="findAllTypes" onload="fillSel()"></script>
 </body>
 </html>

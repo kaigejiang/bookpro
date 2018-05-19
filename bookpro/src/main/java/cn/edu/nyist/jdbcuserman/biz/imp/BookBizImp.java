@@ -1,5 +1,7 @@
 package cn.edu.nyist.jdbcuserman.biz.imp;
 
+import java.util.List;
+
 import cn.edu.nyist.jdbcuserman.biz.BookBiz;
 import cn.edu.nyist.jdbcuserman.dao.BookDao;
 import cn.edu.nyist.jdbcuserman.dao.imp.BookDaoImp;
@@ -15,6 +17,18 @@ public class BookBizImp implements BookBiz {
 	public int saveBook(BookVo bookVo) {
 		BookDao bookDao = new BookDaoImp();
 		return bookDao.save(bookVo);
+	}
+
+	@Override
+	public List<BookVo> findAllBooks(int pageNumber) {
+		BookDao bookDao = new BookDaoImp();
+		return bookDao.findAllBooks(pageNumber);
+	}
+
+	@Override
+	public int findTotal() {
+		BookDao bookDao = new BookDaoImp();
+		return bookDao.findTotal();
 	}
 
 }
