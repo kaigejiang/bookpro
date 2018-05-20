@@ -26,9 +26,10 @@ public class BookBizImp implements BookBiz {
 	}
 
 	@Override
-	public int findTotal() {
+	public int findTotal(String name) {
 		BookDao bookDao = new BookDaoImp();
-		return bookDao.findTotal();
+		return bookDao.findTotal(name);
 	}
+
 
 }

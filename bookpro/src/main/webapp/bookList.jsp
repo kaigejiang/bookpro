@@ -38,11 +38,11 @@
 							</ul>
 						</li>
 					</ul>
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search" id="searchFrm" action="bookList">
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<input type="text" class="form-control" name="name" value='<%=request.getAttribute("name")==null?"":request.getAttribute("name")%>'/>
 						</div> 
-						<button type="submit" class="btn btn-default">
+						<button type="submit" class="btn btn-default" >
 							搜索
 						</button>
 					</form>
@@ -213,6 +213,13 @@
 		<script type="text/javascript">
 		 $(function(){
              $("a[ href='bookList?pageNo=<%=pageNumber%>']").parent("li").addClass("active");
+             //提交参数
+             console.dir($(".pagination a[href^='bookList?pageNumber=']"))
+             $(".pagination a[href^='bookList?pageNumber=']").click(function() {
+ 				//用序列化表单
+            	 this.href += "&" + $("#searchFrm").serialize();
+
+ 			});
          });
 		</script>
 </body>

@@ -10,7 +10,7 @@ public interface BookDao {
 
 	List<BookVo> findAllBooks(int pageNumber);
 
-	int findTotal();
+	int findTotal(String name);
 
 
 }

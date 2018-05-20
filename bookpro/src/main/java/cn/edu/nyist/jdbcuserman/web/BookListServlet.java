@@ -25,6 +25,8 @@ public class BookListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//1 获取参数
 		String strPageNumber = request.getParameter("pageNumber");
+		String name = request.getParameter("name");
+		System.out.println(name);
 		int pageNumber;
 		try {
 			pageNumber= Integer.parseInt(strPageNumber);
@@ -34,13 +36,14 @@ public class BookListServlet extends HttpServlet {
 		//2 调用业务层
 		BookBiz bookBiz = new BookBizImp();
 		List<BookVo> ls = bookBiz.findAllBooks(pageNumber);
-		int total = bookBiz.findTotal();
+		int total = bookBiz.findTotal(name);
 		//3 给用户响应
 		if(total % PageConstant.PAGE_SIZE==0) {
 			request.setAttribute("totalPage", total/PageConstant.PAGE_SIZE);
 		}else {
 			request.setAttribute("totalPage", total/PageConstant.PAGE_SIZE+1);
 		}
+		request.setAttribute("name", name);
 		request.setAttribute("pageNumber", pageNumber);
 		request.setAttribute("ls", ls);
 		request.getRequestDispatcher("bookList.jsp").forward(request, response);

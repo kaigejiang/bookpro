@@ -78,14 +78,19 @@ public  class BookDaoImp implements BookDao {
 	}
 
 	@Override
-	public int findTotal() {
+	public int findTotal(String name) {
 		Connection connection =null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		
+		String sql;
 		try {
 			connection = DsUtil.getConn();
-			String sql = "select count(*) from t_book";
+			if (name==null) {
+				sql = "select count(*) from t_book";
+			}else {
+				sql = "select count(*) from t_book where name or descri or author like '%"+name+"%'";
+			}
+			
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(sql);
 			if (resultSet.next()) {

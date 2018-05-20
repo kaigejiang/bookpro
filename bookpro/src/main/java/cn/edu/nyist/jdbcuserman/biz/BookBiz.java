@@ -10,6 +10,6 @@ public interface BookBiz {
 
 	List<BookVo> findAllBooks(int pageNumber);
 
-	int findTotal();
+	int findTotal(String name);
 
 }
