@@ -26,7 +26,9 @@ public class BookListServlet extends HttpServlet {
 		//1 获取参数
 		String strPageNumber = request.getParameter("pageNumber");
 		String name = request.getParameter("name");
-		System.out.println(name);
+		if (name!="") {
+			System.out.println("搜索内容："+name);
+		}
 		int pageNumber;
 		try {
 			pageNumber= Integer.parseInt(strPageNumber);
@@ -37,6 +39,11 @@ public class BookListServlet extends HttpServlet {
 		BookBiz bookBiz = new BookBizImp();
 		List<BookVo> ls = bookBiz.findAllBooks(pageNumber);
 		int total = bookBiz.findTotal(name);
+		if(total==0) {
+			System.out.println("总页数："+total);
+			request.setAttribute("msg", "查询不到。。。。。。");
+			total = bookBiz.findTotal("");
+		}
 		//3 给用户响应
 		if(total % PageConstant.PAGE_SIZE==0) {
 			request.setAttribute("totalPage", total/PageConstant.PAGE_SIZE);

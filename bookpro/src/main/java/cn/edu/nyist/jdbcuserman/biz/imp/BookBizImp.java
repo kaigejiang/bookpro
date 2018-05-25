@@ -31,5 +31,23 @@ public class BookBizImp implements BookBiz {
 		return bookDao.findTotal(name);
 	}
 
+	@Override
+	public boolean del(int id) {
+		BookDao bookDao = new BookDaoImp();
+		return bookDao.del(id);
+	}
+
+	@Override
+	public BookVo findBookId(int id) {
+		BookDao bookDao = new BookDaoImp();
+		return bookDao.findId(id);
+	}
+
+	@Override
+	public int editBook(BookVo bookVo) {
+		BookDao bookDao = new BookDaoImp();
+		return bookDao.edit(bookVo);
+	}
+
 
 }

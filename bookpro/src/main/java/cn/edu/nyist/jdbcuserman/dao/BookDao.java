@@ -12,5 +12,11 @@ public interface BookDao {
 
 	int findTotal(String name);
 
+	boolean del(int id);
+
+	BookVo findId(int id);
+
+	int edit(BookVo bookVo);
+
 
 }

@@ -61,6 +61,14 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
+		<%
+							if (request.getAttribute("msg") != null) {
+						%>
+						<div class="alert alert-warning" role="alert"><%=request.getAttribute("msg")%></div>
+
+						<%
+							}
+						%>
 			<table class="table">
 				<thead>
 					<tr>
@@ -72,12 +80,13 @@
 							<th>price</th>
 							<th>author</th>
 							<th>pubDate</th>
+							<th>操作</th>
 						</tr>
 				</thead>
 				<tbody>
 				
 					<%
-					List<BookVo> ls = (List<BookVo>) request.getAttribute("ls");
+					List<BookVo> ls = (List<BookVo>)request.getAttribute("ls");
 					for(BookVo bookVo :ls){
 					%>
 					<tr>
@@ -89,6 +98,10 @@
 					<td><%=bookVo.getPrice()%></td>
 					<td><%=bookVo.getAuthor()%></td>
 					<td><%=bookVo.getPubDate()%></td>
+					<td> <a href="remove?id=<%=bookVo.getId()%>" class="glyphicon glyphicon-remove" onclick="remove(event)"> </a>
+					<a href="toBookEdit?id=<%=bookVo.getId()%>" class="glyphicon glyphicon-pencil"> </a>
+					</td>
+					
 					</tr>
 					<%
 					}
@@ -221,6 +234,12 @@
 
  			});
          });
+			function remove(event) {
+				if (!confirm("确认删除？")) {
+					//恢复默认
+					event.preventDefault();
+				}
+			};
 		</script>
 </body>
 </html>

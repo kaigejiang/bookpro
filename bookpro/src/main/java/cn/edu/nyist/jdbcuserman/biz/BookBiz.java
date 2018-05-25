@@ -12,4 +12,10 @@ public interface BookBiz {
 
 	int findTotal(String name);
 
+	boolean del(int id);
+
+	BookVo findBookId(int id);
+
+	int editBook(BookVo bookVo);
+
 }

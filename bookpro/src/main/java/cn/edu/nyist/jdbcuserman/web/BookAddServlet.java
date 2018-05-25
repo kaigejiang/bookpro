@@ -50,7 +50,6 @@ public class BookAddServlet extends HttpServlet {
 		if (ret > 0) {
 			//
 			response.getWriter().write("保存成功");
-			System.out.println(ret);
 		} else {
 			
 			request.setAttribute("msg","保存失败");
